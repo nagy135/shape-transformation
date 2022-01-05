@@ -49,8 +49,9 @@ const WebcamCapture = () => {
         }
 
         <div id="slideshow">
-          {images.length &&
-            <img id="result" alt="result" src={images[slide]} />
+          {images.length
+            ? <img id="result" alt="result" src={images[slide]} />
+            : <span>Capture image!</span>
           }
         </div>
       </div>
