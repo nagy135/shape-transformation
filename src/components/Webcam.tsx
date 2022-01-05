@@ -8,21 +8,22 @@ const videoConstraints = {
 };
 
 const WebcamCapture = () => {
-  const webcamRef = useRef(null);
+  const webcamRef = useRef<Webcam>(null);
 
-  const [images, setImages] = useState([]);
-  const [ghost, setGhost] = useState(null);
+  const [images, setImages] = useState<Array<string>>([]);
+  const [ghost, setGhost] = useState<string | null>(null);
 
   const capture = useCallback(
     () => {
-      const imageSrc = webcamRef.current.getScreenshot();
+      if (!webcamRef.current) return;
+      const imageSrc = webcamRef.current.getScreenshot() as string;
       setImages(old => [...old, imageSrc]);
       setGhost(imageSrc);
     },
     [webcamRef]
   );
 
-  const [slide, setSlide] = useState(0);
+  const [_slide, setSlide] = useState(0);
 
   useEffect(() => {
 
@@ -35,10 +36,10 @@ const WebcamCapture = () => {
 
 
         for (let i = 0; i < imgs.length; i++) {
-          let img = imgs[i];
+          let img = imgs[i] as HTMLElement;
           img.style.display = 'none';
         }
-        const selectedOne = document.querySelector('div#slideshow > img[i="' + newId + '"]');
+        const selectedOne = document.querySelector('div#slideshow > img[data-i="' + newId + '"]') as HTMLElement;
         if (selectedOne) selectedOne.style.display = 'block';
 
         return newId;
@@ -74,7 +75,7 @@ const WebcamCapture = () => {
       }
 
       <div id="slideshow">
-        {images.map((imageSrc, i) => <img style={{ position: 'absolute', top: 800, display: i == 0 ? 'default' : 'none' }} i={i} key={i} id="result" alt="result" src={imageSrc} />)}
+        {images.map((imageSrc, i) => <img style={{ position: 'absolute', top: 800, display: i == 0 ? 'default' : 'none' }} data-i={i} key={i} id="result" alt="result" src={imageSrc} />)}
       </div>
     </>
   );

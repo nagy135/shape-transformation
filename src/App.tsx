@@ -1,5 +1,5 @@
 import './App.css';
-import Webcam from './Webcam';
+import Webcam from './components/Webcam';
 
 function App() {
   return (
