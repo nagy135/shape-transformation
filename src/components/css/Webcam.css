@@ -12,8 +12,8 @@
     border-radius: 10px;
 }
 
-.ghost {
-    position: 'absolute';
+img.ghost {
+    position: absolute;
     left: 0;
     top: 0;
     width: 100wv;
