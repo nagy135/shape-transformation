@@ -23,26 +23,13 @@ const WebcamCapture = () => {
     [webcamRef]
   );
 
-  const [_slide, setSlide] = useState(0);
+  const [slide, setSlide] = useState(0);
 
   useEffect(() => {
 
     const intId = setInterval(() => {
       setSlide(old => {
-        const total = isNaN(images.length) || images.length === 0 ? 1 : images.length;
-        const newId = (old + 1) % total;
-
-        const imgs = document.querySelectorAll("div#slideshow > img");
-
-
-        for (let i = 0; i < imgs.length; i++) {
-          let img = imgs[i] as HTMLElement;
-          img.style.display = 'none';
-        }
-        const selectedOne = document.querySelector('div#slideshow > img[data-i="' + newId + '"]') as HTMLElement;
-        if (selectedOne) selectedOne.style.display = 'block';
-
-        return newId;
+        return (old + 1) % (images.length || 1);
       });
     }, 300);
     return () => { if (intId) clearInterval(intId) };
@@ -75,7 +62,9 @@ const WebcamCapture = () => {
       }
 
       <div id="slideshow">
-        {images.map((imageSrc, i) => <img style={{ position: 'absolute', top: 800, display: i == 0 ? 'default' : 'none' }} data-i={i} key={i} id="result" alt="result" src={imageSrc} />)}
+        {images.length &&
+          <img style={{ position: 'absolute', top: 800 }} id="result" alt="result" src={images[slide]} />
+        }
       </div>
     </>
   );
