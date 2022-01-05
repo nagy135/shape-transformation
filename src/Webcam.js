@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Webcam from "react-webcam";
 
 const videoConstraints = {
@@ -8,11 +8,11 @@ const videoConstraints = {
 };
 
 const WebcamCapture = () => {
-  const webcamRef = React.useRef(null);
+  const webcamRef = useRef(null);
 
-  const [images, setImages] = React.useState([]);
+  const [images, setImages] = useState([]);
 
-  const capture = React.useCallback(
+  const capture = useCallback(
     () => {
       const imageSrc = webcamRef.current.getScreenshot();
       setImages(old => [...old, imageSrc]);
@@ -20,12 +20,34 @@ const WebcamCapture = () => {
     [webcamRef]
   );
 
-  const generate = () => {
-    const encoded = encodeImages(images);
-    console.log("================\n", "encoded: ", encoded, "\n================");
-  }
+  const [slide, setSlide] = useState(0);
+  let [intervalId, setIntervalId] = useState(null);
 
-  React.useEffect(() => console.log(images), [images]);
+  useEffect(() => {
+    if (intervalId) clearInterval(intervalId);
+
+    setIntervalId(setInterval(() => {
+      setSlide(old => {
+        const total = isNaN(images.length) || images.length === 0 ? 1 : images.length;
+        const newId = (old + 1) % total;
+
+        const imgs = document.querySelectorAll("div#slideshow > img");
+
+
+        for (let i = 0; i < imgs.length; i++) {
+          let img = imgs[i];
+          img.style.display = 'none';
+        }
+        const selectedOne = document.querySelector('div#slideshow > img[i="'+ newId + '"]');
+        if (selectedOne) selectedOne.style.display = 'block';
+
+        return newId;
+      });
+    }, 300));
+  }, [images]);
+
+
+  useEffect(() => console.log(images), [images]);
 
   return (
     <>
@@ -33,26 +55,17 @@ const WebcamCapture = () => {
         audio={false}
         height={720}
         ref={webcamRef}
-        screenshotFormat="image/jpeg"
+        screenshotFormat="image/png"
         width={1280}
         videoConstraints={videoConstraints}
       />
       <button onClick={capture}>Capture photo</button>
-      <button onClick={generate}>Generate</button>
 
-      <img id="result" alt="result"/>
+      <div id="slideshow">
+        {images.map((imageSrc, i) => <img style={{ display: i == 0 ? 'default' : 'none' }} i={i} key={i} id="result" alt="result" src={imageSrc} />)}
+      </div>
     </>
   );
-};
-
-const encodeImages = (images) => {
-  var encoder = new GIFEncoder();
-  encoder.setRepeat(0); //auto-loop
-  encoder.setDelay(500);
-  console.log(encoder.start());
-  console.log(encoder.addFrame("haha"));
-  encoder.finish();
-  return 'data:image/gif;base64,'+encode64(encoder.stream().getData());
 };
 
 export default WebcamCapture;
