@@ -35,10 +35,8 @@ const WebcamCapture = () => {
       <div id="total-wrapper">
         <Webcam
           audio={false}
-          height={720}
           ref={webcamRef}
           screenshotFormat="image/png"
-          width={1280}
           id="webcam"
           videoConstraints={{
             facingMode: "environment"
