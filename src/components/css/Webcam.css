@@ -19,17 +19,14 @@ img.ghost {
     width: 100wv;
     z-index: 1000;
     opacity: 0.5;
-    border: 1px solid blue;
 }
 
 div#total-wrapper {
     position: relative;
-    border: 1px solid orange;
 }
 
 div#slideshow {
     width: 100%;
-    border: 1px solid black;
 }
 
 div#result {
@@ -42,6 +39,5 @@ div#result > img {
 }
 
 #webcam {
-    border: 1px solid red;
     width:100%;
 }
