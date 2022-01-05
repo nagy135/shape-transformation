@@ -45,7 +45,7 @@ const WebcamCapture = () => {
         <button id="capture-btn" onClick={capture}>Capture photo</button>
 
         {ghost &&
-          <img key="ghost" className="ghost" alt="ghost" src={ghost} />
+          <img className="ghost" alt="ghost" src={ghost} />
         }
 
         <div id="slideshow">
