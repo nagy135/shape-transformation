@@ -1,0 +1,39 @@
+#capture-btn {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    z-index: 9999;
+    height: 5em;
+    padding: 1em;
+    font-size: large;
+    font-weight: 800;
+    color: white;
+    background-color: #c22330;
+    border-radius: 10px;
+}
+
+.ghost {
+    position: 'absolute';
+    left: 0;
+    top: 0;
+    opacity: 0.;
+}
+
+div#total-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vw;
+}
+
+div#slideshow {
+    width: 100%;
+}
+
+div#result {
+    width: 100%;
+    height: 100%;
+}
+div#result > img {
+    width: 100%;
+    height: 100%;
+}
