@@ -41,8 +41,6 @@ const WebcamCapture = () => {
           width={1280}
           id="webcam"
           videoConstraints={{
-            width: 1280,
-            height: 720,
             facingMode: "environment"
           }}
         />

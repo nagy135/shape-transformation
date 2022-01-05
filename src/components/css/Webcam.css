@@ -43,4 +43,6 @@ div#result > img {
 
 #webcam {
     border: 1px solid red;
+    width:100vw;
+    height:500px;
 }
