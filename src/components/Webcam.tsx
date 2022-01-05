@@ -43,11 +43,6 @@ const WebcamCapture = () => {
         ref={webcamRef}
         screenshotFormat="image/png"
         width={1280}
-        style={{
-          position: 'absolute',
-          left: 0,
-          top: 0,
-        }}
         videoConstraints={videoConstraints}
       />
       <button style={{ position: 'absolute', top: 0, right: 0, zIndex: 9999 }} onClick={capture}>Capture photo</button>
@@ -63,7 +58,7 @@ const WebcamCapture = () => {
 
       <div id="slideshow">
         {images.length &&
-          <img style={{ position: 'absolute', top: 800 }} id="result" alt="result" src={images[slide]} />
+          <img style={{ position: 'absolute', top: 720, left: 0 }} id="result" alt="result" src={images[slide]} />
         }
       </div>
     </>
