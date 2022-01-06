@@ -64,8 +64,8 @@ const WebcamCapture = () => {
           </div>
         }
         <div className="btn-wrapper">
-          <button className="btn btn-capture btn-4 btn-4a icon-arrow-right" onClick={capture}>Capture photo</button>
-          <button className="btn btn-slides btn-4 btn-4a icon-arrow-right" onClick={toggle}>{showCamera ? 'Show slideshow' : 'Show camera'}</button>
+          <button className="btn btn-capture btn-4 btn-4a" onClick={capture}>Capture photo</button>
+          <button className="btn btn-slides btn-4 btn-4a" onClick={toggle}>{showCamera ? 'Show slideshow' : 'Show camera'}</button>
         </div>
       </div>
     </>
