@@ -1,14 +1,28 @@
-#capture-btn {
+btn#capture-btn {
     position: fixed;
     bottom: 0px;
     right: 0px;
     z-index: 9999;
     height: 5em;
-    padding: 1em;
+    padding: 0.5em;
     font-size: large;
     font-weight: 800;
     color: white;
     background-color: #c22330;
+    border-radius: 10px;
+}
+
+btn#toggle-btn {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 9999;
+    height: 5em;
+    padding: 0.5em;
+    font-size: large;
+    font-weight: 800;
+    color: white;
+    background-color: #304bcc;
     border-radius: 10px;
 }
 
