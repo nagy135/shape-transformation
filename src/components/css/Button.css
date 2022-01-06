@@ -798,7 +798,7 @@ a:active {
 }
 
 .btn-4:active:before {
-	color: #17954c;
+	/* color: #17954c; */
 }
 
 /* Button 4a */
