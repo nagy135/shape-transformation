@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Webcam from "react-webcam";
 import './css/Webcam.css';
+import './css/Button.css';
 
 const WebcamCapture = () => {
   const webcamRef = useRef<Webcam>(null);
@@ -58,12 +59,14 @@ const WebcamCapture = () => {
           : <div id="slideshow">
             {images.length
               ? <img id="result" alt="result" src={images[slide]} />
-              : <span>Capture image!</span>
+              : <h1>Capture images first!</h1>
             }
           </div>
         }
-        <button id="capture-btn" onClick={capture}>Capture photo</button>
-        <button id="toggle-btn" onClick={toggle}>{showCamera ? 'Show slideshow' : 'Show camera'}</button>
+        <div className="btn-wrapper">
+          <button className="btn btn-capture btn-4 btn-4a icon-arrow-right" onClick={capture}>Capture photo</button>
+          <button className="btn btn-slides btn-4 btn-4a icon-arrow-right" onClick={toggle}>{showCamera ? 'Show slideshow' : 'Show camera'}</button>
+        </div>
       </div>
     </>
   );
