@@ -8,6 +8,8 @@ const WebcamCapture = () => {
   const [images, setImages] = useState<Array<string>>([]);
   const [ghost, setGhost] = useState<string | null>(null);
 
+  const [showCamera, setShowCamera] = useState(true);
+
   const capture = useCallback(
     () => {
       if (!webcamRef.current) return;
@@ -18,6 +20,9 @@ const WebcamCapture = () => {
     [webcamRef]
   );
 
+  const toggle = () => {
+    setShowCamera(old => !old);
+  }
   const [slide, setSlide] = useState(0);
 
   useEffect(() => {
@@ -33,27 +38,32 @@ const WebcamCapture = () => {
   return (
     <>
       <div id="total-wrapper">
-        <Webcam
-          audio={false}
-          ref={webcamRef}
-          screenshotFormat="image/png"
-          id="webcam"
-          videoConstraints={{
-            facingMode: "environment"
-          }}
-        />
-        <button id="capture-btn" onClick={capture}>Capture photo</button>
+        {showCamera
+          ? <div>
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/png"
+              id="webcam"
+              videoConstraints={{
+                facingMode: "environment"
+              }}
+            />
 
-        {ghost &&
-          <img className="ghost" alt="ghost" src={ghost} />
+            {ghost &&
+              <img className="ghost" alt="ghost" src={ghost} />
+            }
+
+          </div>
+          : <div id="slideshow">
+            {images.length
+              ? <img id="result" alt="result" src={images[slide]} />
+              : <span>Capture image!</span>
+            }
+          </div>
         }
-
-        <div id="slideshow">
-          {images.length
-            ? <img id="result" alt="result" src={images[slide]} />
-            : <span>Capture image!</span>
-          }
-        </div>
+        <button id="capture-btn" onClick={capture}>Capture photo</button>
+        <button id="toggle-btn" onClick={toggle}>Toggle</button>
       </div>
     </>
   );
